@@ -15,12 +15,17 @@ const EmailModal: React.FC<EmailModalProps> = ({ open, onClose, onEmailSubmit })
   const handleSubmit = () => {
     if (email) {
       onEmailSubmit(email)
-      onClose()
+      onClose() // Close the modal only after submitting
     }
   }
 
   return (
-    <Dialog open={open} onOpenChange={onClose}>
+    <Dialog open={open} onOpenChange={(isOpen) => {
+      if (!isOpen) {
+        // Prevent closing when clicking outside or pressing escape
+        return
+      }
+    }}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Enter Your Email</DialogTitle>
