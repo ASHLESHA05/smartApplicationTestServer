@@ -37,6 +37,8 @@ export default function SmartAppliancesDashboard() {
 
   const saveDataToFirebase = async (data: UserData) => {
     try {
+
+
       await axios.post("/api/saveData", { email, ...data })
     } catch (error) {
       console.error("Failed to save data to Firebase:", error)
@@ -154,7 +156,7 @@ export default function SmartAppliancesDashboard() {
             <ThemeToggle />
           </div>
 
-          {showEmailModal && <EmailModal open={showEmailModal} onClose={() => setShowEmailModal(false)} onEmailSubmit={handleEmailSubmit} />}
+          {(showEmailModal || !email) && <EmailModal open={showEmailModal} onClose={() => setShowEmailModal(false)} onEmailSubmit={handleEmailSubmit} />}
 
           {!showEmailModal && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
